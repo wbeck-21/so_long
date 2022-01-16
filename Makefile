@@ -8,7 +8,7 @@ MLX			=	mlx/Makefile.gen
 
 LFT			=	libft/libft.a
 
-INC			=	-I ./include -I ./libft -I ./mlx
+INC			=	-I ./libft -I ./mlx #makefiles
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 

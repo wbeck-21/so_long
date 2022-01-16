@@ -1,19 +1,63 @@
 #include "include/so_long.h"
 
-typedef struct    data_s
+int	key_press(int key, t_base *base)
 {
-    void          *mlx_ptr;
-    void          *mlx_win;
-}                 data_t;
+    (void)key;
+	(void)base;
 
-int main(void)
+	mlx_destroy_window(0, 0); // seg fault
+	return (0);
+}
+
+int	destroy_notify(int key, t_base *base)
 {
-    data_t        data;
+	(void)key;
+	(void)base;
+	
+    mlx_destroy_window(0, 0); // seg fault
+	return (0);
+}
 
-    if ((data.mlx_ptr = mlx_init()) == NULL)
-        return (EXIT_FAILURE);
-    if ((data.mlx_win = mlx_new_window(data.mlx_ptr, 640, 480, "Hello world")) == NULL)
-        return (EXIT_FAILURE);
-    mlx_loop(data.mlx_ptr);
-    return (EXIT_SUCCESS);
+t_base *base_init(char *map)
+{
+	t_base *base;
+	(void) map;
+
+	base = (t_base *)malloc(sizeof(t_base));
+	if (!base)
+	{
+		free(base);
+		return 0;
+	}
+	base->mlx = 0;
+	base->window = 0;
+	return (base);
+}
+
+int main (int argc, char **argv)
+{
+	t_base *base;
+
+	if (argc == 2)
+	{
+		base = base_init(argv[1]);
+		base->mlx = mlx_init();
+		if (!(base->mlx))
+		{
+			free(base);
+			return 0;
+		}
+		base->window = mlx_new_window(base->mlx, 600, 600, "so_long");
+		if (!(base->window))
+		{
+			free(base);
+			return 0;
+		}
+		mlx_hook(base->window, 2, 1L << 0, key_press, base);
+		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);
+		mlx_loop(base->mlx);
+	}
+	else 
+		printf("ERROR\nmore or less args\n");
+	return (0);
 }

@@ -1,27 +1,71 @@
 #include "include/so_long.h"
 
-int	key_press(int key, t_base *base)
+void read_map_file(t_base *base, int fd, char **map_text)
 {
-    (void)key;
-	(void)base;
+	char	*buf;
+    char    *temp;
+    int		bytes;
 
-	mlx_destroy_window(0, 0); // seg fault
-	return (0);
+	buf = (char *)malloc(sizeof(char) * 1024 + 1); //мб как-то поколдовать с размером массива
+    if (!buf)
+		return ;
+	bytes = 1;
+	while (bytes)
+	{
+		bytes = read(fd, buf, 1024);
+		if (bytes < 0)
+		{
+			free(buf);
+            free(*map_text);
+            free(base);
+            close(fd);
+			return ;
+		}
+        else
+        {
+            buf[bytes] = '\0';
+            temp = ft_strjoin(temp, buf); //temp зафришить в конце ft_strjoin
+            free(*map_text);
+            *map_text = temp;
+            if (!(*map_text))
+            {
+                free(base);
+                close(fd);
+                return ;
+            }
+        }
+	}
+	free(buf);
 }
 
-int	destroy_notify(int key, t_base *base)
+void map_processor(t_base *base, char* map_file)
 {
-	(void)key;
-	(void)base;
-	
-    mlx_destroy_window(0, 0); // seg fault
-	return (0);
+    int fd;
+    char *map_text;
+    
+    fd = open(map_file, O_RDONLY);
+    if (fd <= 0)
+    {
+        free(base);
+        return ;
+    }
+    map_text = (char *)malloc(sizeof(char));
+    if (!map_text)
+    {
+        close(fd);
+        free(base);
+        return ;
+    }
+    read_map_file(base, fd, &map_text);
+    printf("%s", map_text);
+
 }
 
-t_base *base_init(char *map)
+
+t_base *base_init(char *map_file) // проверь потом, можно ли передать из мейна *base
 {
 	t_base *base;
-	(void) map;
+    (void) map_file;
 
 	base = (t_base *)malloc(sizeof(t_base));
 	if (!base)
@@ -31,6 +75,10 @@ t_base *base_init(char *map)
 	}
 	base->mlx = 0;
 	base->window = 0;
+    base->map = 0;
+    base->width = 0;
+    base->height = 0;
+    map_processor(base, map_file);
 	return (base);
 }
 

@@ -14,6 +14,13 @@ typedef struct s_base
 {
     void	*mlx;
 	void	*window;
+    char    **map;
+    int     width;
+    int     height;
+
 }   t_base;
+
+int	key_press(int key, t_base *base);
+int	destroy_notify(int key, t_base *base);
 
 #endif

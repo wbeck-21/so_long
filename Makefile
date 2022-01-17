@@ -12,7 +12,7 @@ INC			=	-I ./libft -I ./mlx #makefiles
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-SRC			=	so_long.c 
+SRC			=	so_long.c events.c
 
 OBJ			=	$(SRC:.c=.o)
 

@@ -17,6 +17,9 @@ typedef struct s_base
     char    **map;
     int     width;
     int     height;
+    int     count_p;
+    int     count_c;
+    int     count_e;
 
 }   t_base;
 

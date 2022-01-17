@@ -49,7 +49,7 @@ void map_processor(t_base *base, char* map_file)
         free(base);
         return ;
     }
-    map_text = (char *)malloc(sizeof(char));
+    map_text = ft_calloc(1, 1);
     if (!map_text)
     {
         close(fd);

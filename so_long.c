@@ -2,7 +2,7 @@
 
 void read_map_file(t_base *base, int fd, char **map_text)
 {
-	char	*buf;
+	char    *buf;
     char    *temp;
     int		bytes;
 
@@ -21,27 +21,71 @@ void read_map_file(t_base *base, int fd, char **map_text)
             close(fd);
 			return ;
 		}
-        else
+        buf[bytes] = '\0';
+        temp = ft_strjoin(temp, buf); //temp зафришить в конце ft_strjoin
+        free(*map_text);
+        *map_text = temp;
+        if (!(*map_text))
         {
-            buf[bytes] = '\0';
-            temp = ft_strjoin(temp, buf); //temp зафришить в конце ft_strjoin
-            free(*map_text);
-            *map_text = temp;
-            if (!(*map_text))
-            {
-                free(base);
-                close(fd);
-                return ;
-            }
+            free(base);
+            close(fd);
+            return ;
         }
 	}
 	free(buf);
 }
 
-void map_processor(t_base *base, char* map_file)
+void map_width(t_base *base, char *map_text)
 {
-    int fd;
-    char *map_text;
+    while (map_text[base->width] && map_text[base->width] != '\n') // или здесь ||
+        base->width++;
+    if (!base->width) //здесь можно проверить первую строчку на наличие 1
+    {
+        free(map_text);
+        free(base);
+        return ;
+    }
+    
+}
+
+void map_height(t_base *base, char *map_text)
+{
+    int				i;
+	int				j;
+
+    if (base->width)
+    {
+        i = 0;
+        while (map_text[i])
+        {
+            j = 0;
+            while (map_text[i + j] && map_text[i + j] != '\n')
+                j++;
+            if (j != base->width) //проверка на равенство ширин каждой строки карты
+            {
+                // free(map_text);
+                free(base);
+                return ;			
+            }
+            i += base->width + 1;
+            base->height++;
+        }
+    }
+    return ;
+}
+
+void map_init(t_base *base, char *map_text)
+{
+    map_width(base, map_text);
+    // printf("%d", base->width); //проверка на ширину
+    map_height(base, map_text);
+    printf("%d", base->height); //проверка на высоту
+}
+
+void map_processor(t_base *base, char *map_file)
+{
+    int     fd;
+    char    *map_text;
     
     fd = open(map_file, O_RDONLY);
     if (fd <= 0)
@@ -53,12 +97,15 @@ void map_processor(t_base *base, char* map_file)
     if (!map_text)
     {
         close(fd);
+        free(map_text); //надо ли здесь фришить эту запупу
         free(base);
         return ;
     }
     read_map_file(base, fd, &map_text);
-    printf("%s", map_text);
-
+    // printf("%s", map_text); //проверка чтения карты
+    close(fd);
+    map_init(base, map_text);
+    free(map_text);
 }
 
 
@@ -90,6 +137,7 @@ int main (int argc, char **argv)
 	{
 		base = base_init(argv[1]);
 		base->mlx = mlx_init();
+        /*    ТАК КАК ВЫЛЕТАЮТ СИГИ, ПОКА ТАК ПРОВЕРЯЮ ЧТЕНИЕ, ПАРСИНГ И Т.Д. КАРТ
 		if (!(base->mlx))
 		{
 			free(base);
@@ -104,6 +152,8 @@ int main (int argc, char **argv)
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);
 		mlx_loop(base->mlx);
+        */
+        
 	}
 	else 
 		printf("ERROR\nmore or less args\n");

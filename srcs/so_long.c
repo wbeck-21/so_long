@@ -1,10 +1,99 @@
 #include "../include/so_long.h"
 
-void	xpm_to_image(t_base *base, t_img **image, char *xpm)
+unsigned int	mlx_get_pixel(t_img *img, int x, int y)
+{
+	return (*(unsigned int *)
+		(img->data + (x * img->bpp / 8 + y * img->size_line)));
+}
+
+void	mlx_draw_pixel(t_img *mlx_img, int x, int y, int color)
+{
+	char			*target;
+
+	target = mlx_img->data + (x * mlx_img->bpp / 8 + y * mlx_img->size_line);
+	*(unsigned int *)target = color;
+}
+
+unsigned int	mlx_rgb_to_int(int o, int r, int g, int b)
+{
+	return (o << 24 | r << 16 | g << 8 | b);
+}
+
+
+static void	draw_square(t_base *base, t_img *img, int x, int y)
+{
+	unsigned int	color;
+	int				i;
+	int				j;
+
+	j = 0;
+	while (j < 16)
+	{
+		i = 0;
+		while (i < 16)
+		{
+			color = mlx_get_pixel(img, i, j);
+			if (color != mlx_rgb_to_int(0, 255, 255, 255))
+				mlx_draw_pixel(base->image, x + i, y + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+
+static void	draw_env(t_base *base, int i, int j)
+{
+	int				k;
+
+	if (base->position_e.x == i && base->position_e.y == j)
+		draw_square(base, base->img_e, i * 16, j * 16);
+	k = -1;
+	while (++k < base->count_c)
+		if (base->position_c[k].x == i && base->position_c[k].y == j)
+			draw_square(base, base->img_c, i * 16, j * 16);
+	if (base->position_p.x == i && base->position_p.y == j)
+		draw_square(base, base->img_p, i * 16, j * 16);
+}
+
+
+static void	draw_map(t_base *base)
+{
+	int				i;
+	int				j;
+
+	j = 0;
+	while (j < base->height)
+	{
+		i = 0;
+		while (i < base->width)
+		{
+			if (base->map[j][i] == 1)
+				draw_square(base, base->img_1, i * 16, j * 16);
+			else
+				draw_square(base, base->img_0, i * 16, j * 16);
+			draw_env(base, i, j);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	draw(t_base *base)
+{
+	draw_map(base);
+	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
+}
+
+
+
+
+void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 {
 	int width;
 	int height;
-	*image = mlx_xpm_file_to_image(base->mlx, xpm, &width, &height);
+
+	*image = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
 	if (!(*image))
 	{
 		free(base);
@@ -12,15 +101,17 @@ void	xpm_to_image(t_base *base, t_img **image, char *xpm)
 	}
 	(*image)->width = width;
 	(*image)->height = height;
+	// mlx_put_image_to_window(base->mlx, base->window, relative_path, position_img.x, position_img.y);
+	printf("width - %d, height - %d\n", width, height);
 }
 
 void	render_images(t_base *base)
 {
-	xpm_to_image(base, &base->img_p, "./img/player.xpm");
-	xpm_to_image(base, &base->img_e, "./img/exit.xpm");
-	xpm_to_image(base, &base->img_c, "./img/collection_item.xpm");
-	xpm_to_image(base, &base->img_1, "./img/wall.xpm");
-	xpm_to_image(base, &base->img_0, "./img/ground.xpm");
+	xpm_to_image(base, &base->img_p, "./img/player-1.xpm");
+	xpm_to_image(base, &base->img_e, "./img/exit-1.xpm");
+	xpm_to_image(base, &base->img_c, "./img/collection_item-1.xpm");
+	xpm_to_image(base, &base->img_1, "./img/wall-1.xpm");
+	xpm_to_image(base, &base->img_0, "./img/empty-1.xpm");
 }
 
 void	render_init(t_base *base)
@@ -31,13 +122,13 @@ void	render_init(t_base *base)
 		free(base);
 		return ;
 	}
-	base->window = mlx_new_window(base->mlx, base->width * 50, base->height * 50, "so_long");
+	base->window = mlx_new_window(base->mlx, base->width * 16, base->height * 16, "so_long");
 	if (!base->window)
 	{
 		free(base);
 		return ;
 	}
-	base->image = mlx_new_image(base->mlx, base->width * 50, base->height * 50);
+	base->image = mlx_new_image(base->mlx, base->width * 16, base->height * 16);
 	if (!base->image)
 	{
 		free(base);
@@ -72,19 +163,19 @@ void	get_position(t_base *base)
 			{
 				base->position_p.x = i;
 				base->position_p.y = j;
-				// base->map[i][j] = '0';
+				base->map[i][j] = '0';
 			}
 			if (base->map[i][j] == 'E')
 			{
 				base->position_e.x = i;
 				base->position_e.y = j;
-				// base->map[i][j] = '0';
+				base->map[i][j] = '0';
 			}
 			if (base->map[i][j] == 'C')
 			{
 				base->position_c[k].x = i;
 				base->position_c[k].y = j;
-				// base->map[i][j] = '0';
+				base->map[i][j] = '0';
 				k++;
 			}
 			j++;
@@ -113,6 +204,11 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
     base->count_p = 0;
     base->count_c = 0;
     base->count_e = 0;
+	base->img_p = 0;
+    base->img_c = 0;
+    base->img_e = 0;
+	base->img_1 = 0;
+    base->img_0 = 0;
 
     map_processor(base, map_file);
 	get_position(base);
@@ -132,26 +228,10 @@ int main (int argc, char **argv)
 	if (argc == 2)
 	{
 		base = base_init(argv[1]);
-		// base->mlx = mlx_init();
-        // ТАК КАК ВЫЛЕТАЮТ СИГИ, ПОКА ТАК ПРОВЕРЯЮ ЧТЕНИЕ, ПАРСИНГ И Т.Д. КАРТ
-		// if (!(base->mlx))
-		// {
-		// 	free(base);
-		// 	return 0;
-		// }
-		// base->window = mlx_new_window(base->mlx, 600, 600, "so_long");
-		// if (!(base->window))
-		// {
-		// 	free(base);
-		// 	return 0;
-		// }
-
+		draw(base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
-		
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);
-
 		mlx_loop(base->mlx);
-	printf("LOL\n");
 	}
 	else 
 		printf("ERROR\nmore or less args\n");

@@ -3,9 +3,7 @@
 int check_border(t_base *base, int i)
 {
     if (i < base->width || i % (base->width + 1) == base->width - 1 || i % (base->width + 1) == 0 || i >= (base->width + 1) * (base->height - 1))
-    {
 		return (1);
-    }
 	return (0);
 }
 

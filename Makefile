@@ -12,11 +12,13 @@ INC			=	-I ./libft -I ./mlx #makefiles
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-SRC			=	so_long.c events.c
+SRC			=	srcs/so_long.c srcs/events.c \
+				srcs/map_size.c srcs/map_isvalid.c \
+				srcs/map_processor.c
 
 OBJ			=	$(SRC:.c=.o)
 
-RM		=	rm -rf
+RM			=	rm -rf
 
 all:		$(MLX) $(NAME)
 

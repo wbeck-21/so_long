@@ -1,4 +1,4 @@
-#include "include/so_long.h"
+#include "../include/so_long.h"
 
 int	key_press(int key, t_base *base)
 {

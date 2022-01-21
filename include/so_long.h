@@ -39,6 +39,13 @@ typedef struct s_base
     int         count_c;
     int         count_e;
 
+    int         up;
+    int         down;
+    int         right;
+    int         left;
+
+    int         step;
+
     t_img       *img_p;
     t_img       *img_e;
     t_img       *img_c;
@@ -54,11 +61,14 @@ typedef struct s_base
 }   t_base;
 
 int     key_press(int key, t_base *base);
+int	key_release(int key, t_base *base);
 int     destroy_notify(int key, t_base *base);
 void    map_width(t_base *base, char *map_text);
 void    map_height(t_base *base, char *map_text);
 void    check_valid_map(t_base *base, char *map_text);
 void    map_processor(t_base *base, char *map_file);
+
+void	create_map(t_base *base);
 
 
 #endif

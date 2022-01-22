@@ -55,20 +55,19 @@ typedef struct s_base
     t_pos       position_p;
     t_pos       position_e;
     t_pos       *position_c;
-    // t_pos       *position_0;
-    // t_pos       *position_1;
 
 }   t_base;
 
 int     key_press(int key, t_base *base);
-int	key_release(int key, t_base *base);
+int     key_release(int key, t_base *base);
 int     destroy_notify(int key, t_base *base);
 void    map_width(t_base *base, char *map_text);
 void    map_height(t_base *base, char *map_text);
 void    check_valid_map(t_base *base, char *map_text);
 void    map_processor(t_base *base, char *map_file);
-
 void	create_map(t_base *base);
-
+void	render_images(t_base *base);
+void	get_position(t_base *base);
+void	create_map(t_base *base);
 
 #endif

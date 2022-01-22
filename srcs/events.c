@@ -73,22 +73,13 @@ int	key_press(int key, t_base *base)
 		return (0);
 	}
 	if (key == 119)
-	{
 		base->up = 1;
-	}
 	if (key == 115)
-	{
 		base->down = 1;
-	}
 	if (key == 97)
-	{
 		base->left = 1;
-	}
 	if (key == 100)
-	{
 		base->right = 1;
-	}
-	// printf("up - %d down - %d left - %d right - %d\n", base->up, base->down, base->left, base->right);
 	update(base);
 	return (0);
 }
@@ -101,21 +92,13 @@ int	key_release(int key, t_base *base)
 		return (0);
 	}
 	if (key == 119)
-	{
 		base->up = 0;
-	}
 	if (key == 115)
-	{
 		base->down = 0;
-	}
 	if (key == 97)
-	{
 		base->left = 0;
-	}
 	if (key == 100)
-	{
 		base->right = 0;
-	}
 	update(base);
 	return (0);
 }

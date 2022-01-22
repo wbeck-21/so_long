@@ -47,9 +47,7 @@ void map_init(t_base *base, char *map_text)
 
     // i = 0;
     // while (i < base->height)
-    // {
     //     printf("%s\n", base->map[i++]);
-    // }
     // проверка двумерного массива
 
 }

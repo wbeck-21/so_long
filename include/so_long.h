@@ -46,6 +46,8 @@ typedef struct s_base
 
     int         step;
 
+    int         catch_c;
+
     t_img       *img_p;
     t_img       *img_e;
     t_img       *img_c;

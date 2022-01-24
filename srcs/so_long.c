@@ -52,6 +52,7 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
 	base->right = 0;
 	base->left = 0;
 	base->step = 0;
+	base->catch_c = 0;
 
     map_processor(base, map_file);
 	get_position(base);

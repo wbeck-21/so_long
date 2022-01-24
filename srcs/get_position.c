@@ -25,7 +25,7 @@ void	get_position(t_base *base)
 			{
 				base->position_c[k].x = i;
 				base->position_c[k].y = j;
-				// base->map[i][j] = '0';
+				base->map[i][j] = '0';
 
 				k++;
 			}

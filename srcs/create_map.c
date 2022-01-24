@@ -49,11 +49,10 @@ void	create_map(t_base *base)
 		j = -1;
 		while (++j < base->width)
 		{
-			if (base->map[i][j] == '0')
-				create_field(base, base->img_0, j * 40, i * 40);
+			create_field(base, base->img_0, j * 40, i * 40);
 			if (base->map[i][j] == '1')
 				create_field(base, base->img_1, j * 40, i * 40);
-			if (base->map[i][j] == 'P')
+			if (base->position_p.x == i && base->position_p.y == j)
 				create_field(base, base->img_p, j * 40, i * 40);
 			if (base->map[i][j] == 'E')
 				create_field(base, base->img_e, j * 40, i * 40);
@@ -61,4 +60,10 @@ void	create_map(t_base *base)
 				create_field(base, base->img_c, j * 40, i * 40);
 		}
 	}
+}
+
+void	draw(t_base *base)
+{
+	create_map(base);
+	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
 }

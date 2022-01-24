@@ -15,7 +15,8 @@ LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 SRC			=	srcs/so_long.c srcs/events.c \
 				srcs/map_size.c srcs/map_isvalid.c \
 				srcs/map_processor.c srcs/create_map.c \
-				srcs/get_position.c srcs/render_images.c
+				srcs/get_position.c srcs/render_images.c \
+				srcs/update.c srcs/move.c
 
 OBJ			=	$(SRC:.c=.o)
 

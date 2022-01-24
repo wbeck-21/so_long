@@ -68,6 +68,12 @@ void    map_processor(t_base *base, char *map_file);
 void	create_map(t_base *base);
 void	render_images(t_base *base);
 void	get_position(t_base *base);
-void	create_map(t_base *base);
+// void	create_map(t_base *base);
+void	draw(t_base *base);
+void	update(t_base *base);
+void	up(t_base *base, int x, int y);
+void	down(t_base *base, int x, int y);
+void	left(t_base *base, int x, int y);
+void	right(t_base *base, int x, int y);
 
 #endif

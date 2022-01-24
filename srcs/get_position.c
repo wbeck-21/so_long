@@ -31,6 +31,7 @@ void	get_position(t_base *base)
 			{
 				base->position_p.x = i;
 				base->position_p.y = j;
+				base->map[i][j] = '0';
 			}
 			if (base->map[i][j] == 'E')
 			{

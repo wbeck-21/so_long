@@ -1,72 +1,7 @@
 #include "../include/so_long.h"
 
-void	ft_putendl_fd(char *s, int fd)
-{
-	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
-}
-
-void	move_up(t_base *base, int x, int y)
-{
-	(void) x;
-	(void) y;
-	// printf("1-P - x - %d y - %d\n", base->position_p.x, base->position_p.y);
-	base->position_p.y = base->position_p.y - 1;
-	// printf("2-P - x - %d y - %d\n", base->position_p.x, base->position_p.y);
-	
-}
-
-void	move_down(t_base *base, int x, int y)
-{
-	(void) x;
-	(void) y;
-	// printf("1-P - x - %d y - %d\n", base->position_p.x, base->position_p.y);
-	base->position_p.y = base->position_p.y + 1;
-	// printf("2-P - x - %d y - %d\n", base->position_p.x, base->position_p.y);
-
-}
-
-void	move_left(t_base *base, int x, int y)
-{
-	(void) x;
-	(void) y;
-
-	base->position_p.x -= 1;
-}
-
-void	move_right(t_base *base, int x, int y)
-{
-	(void) x;
-	(void) y;
-
-	base->position_p.x += 1;
-}
-
-void	update(t_base *base)
-{
-	int				x;
-	int				y;
-
-	x = base->position_p.x;
-	y = base->position_p.y;
-
-	if (base->up)
-		move_up(base, x, y);
-	else if (base->down)
-		move_down(base, x, y);
-	else if (base->left)
-		move_left(base, x, y);
-	else if (base->right)
-		move_right(base, x, y);
-	// добавтьб функцию подсчета движений 
-
-	create_map(base);
-	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
-}
-
 int	key_press(int key, t_base *base)
 {
-	printf("%d\n", key);
 	if (key == 65307)
 	{
 		free(base);

@@ -57,9 +57,6 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
 	get_position(base);
 	render_init(base);
 	render_images(base);
-	create_map(base);
-	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
-
 	return (base);
 }
 
@@ -70,6 +67,7 @@ int main (int argc, char **argv)
 	if (argc == 2)
 	{
 		base = base_init(argv[1]);
+		draw(base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);

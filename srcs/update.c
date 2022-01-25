@@ -1,6 +1,6 @@
 #include "../include/so_long.h"
 
-void	catch_c(t_base *base, int x, int y)
+void	catch_c(t_base *base)
 {
 	int	i;
 
@@ -32,8 +32,15 @@ void	update(t_base *base)
 		left(base, x, y);
 	else if (base->right != 0)
 		right(base, x, y);
+	if (base->position_p.x != x || base->position_p.y != y)
+	{
+		base->step++;
+		// printf("step - ");
+		ft_putnbr_fd(base->step, 1);
+		printf("\n");
+	}
+	catch_c(base);
 	draw(base);
-	catch_c(base, x, y);
 	// printf("Px - %d Ex - %d\nPy - %d Ey - %d\n", base->position_p.x, base->position_e.x, base->position_p.y, base->position_e.y);
 	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
 	{

@@ -57,8 +57,6 @@ void	create_map(t_base *base)
 				create_field(base, base->img_p, j * 40, i * 40);
 			if (base->map[i][j] == 'E')
 				create_field(base, base->img_e, j * 40, i * 40);
-			// if (base->map[i][j] == 'C')
-			// 	create_field(base, base->img_c, j * 40, i * 40);
 			k = -1;
 			while (++k < base->count_c)
 				if (base->position_c[k].x == i && base->position_c[k].y == j)

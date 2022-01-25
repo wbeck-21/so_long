@@ -26,7 +26,6 @@ void	get_position(t_base *base)
 				base->position_c[k].x = i;
 				base->position_c[k].y = j;
 				base->map[i][j] = '0';
-
 				k++;
 			}
 			if (base->map[i][j] == 'P')

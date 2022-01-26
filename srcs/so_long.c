@@ -4,22 +4,13 @@ void	render_init(t_base *base)
 {
 	base->mlx = mlx_init();
 	if (!base->mlx)
-	{
-		free(base);
-		return ;
-	}
+	    exit_game(base);
 	base->window = mlx_new_window(base->mlx, base->width * 40, base->height * 40, "so_long");
 	if (!base->window)
-	{
-		free(base);
-		return ;
-	}
+	    exit_game(base);
 	base->image = mlx_new_image(base->mlx, base->width * 40, base->height * 40);
 	if (!base->image)
-	{
-		free(base);
-		return ;
-	}
+        exit_game(base);
 }
 
 t_base *base_init(char *map_file) // проверь потом, можно ли передать из мейна *base
@@ -29,10 +20,7 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
 
 	base = (t_base *)malloc(sizeof(t_base));
 	if (!base)
-	{
-		free(base);
-		return 0;
-	}
+	    exit_game(base);
 	base->mlx = 0;
 	base->window = 0;
 	base->image = 0;
@@ -61,12 +49,28 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
 	return (base);
 }
 
+// int	file_isber(char *map_file)
+// {
+// 	int	len;
+
+// 	len = ft_strlen(map_file);
+// 	if (!map_file)
+// 		return (0);
+// 	if (len < 5)
+// 		return (0);
+// 	if ((ft_strncmp((map_file + len - 4), ".ber", len - 4)))
+// 		return (0);
+// 	return (1);
+// }
+
 int main (int argc, char **argv)
 {
 	t_base *base;
 
 	if (argc == 2)
 	{
+		// if (!file_isber(argv[1]))
+		// 	return (0);
 		base = base_init(argv[1]);
 		draw(base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);

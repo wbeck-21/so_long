@@ -16,7 +16,7 @@ SRC			=	srcs/so_long.c srcs/events.c \
 				srcs/map_size.c srcs/map_isvalid.c \
 				srcs/map_processor.c srcs/create_map.c \
 				srcs/get_position.c srcs/render_images.c \
-				srcs/update.c srcs/move.c
+				srcs/update.c srcs/move.c srcs/exit.c
 
 OBJ			=	$(SRC:.c=.o)
 

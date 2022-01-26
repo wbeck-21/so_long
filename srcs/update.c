@@ -45,7 +45,6 @@ void	update(t_base *base)
 	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
 	{
 		printf("finish\n");
-		free(base);
-		return ;
+		exit_game(base);
 	}
 }

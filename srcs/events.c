@@ -3,10 +3,7 @@
 int	key_press(int key, t_base *base)
 {
 	if (key == 65307)
-	{
-		free(base);
-		return (0);
-	}
+		exit_game(base);
 	if (key == 119)
 		base->up = 1;
 	if (key == 115)
@@ -21,11 +18,6 @@ int	key_press(int key, t_base *base)
 
 int	key_release(int key, t_base *base)
 {
-	if (key == 65307)
-	{
-		free(base);
-		return (0);
-	}
 	if (key == 119)
 		base->up = 0;
 	if (key == 115)
@@ -43,6 +35,6 @@ int	destroy_notify(int key, t_base *base)
 	(void)key;
 	(void)base;
 	
-    mlx_destroy_window(0, 0); // seg fault
+    exit_game(0); // seg fault
 	return (0);
 }

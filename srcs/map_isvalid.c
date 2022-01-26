@@ -45,18 +45,20 @@ void check_valid_map(t_base *base, char *map_text)
             {
                 printf("borders arent correct\n");
                 free(map_text);
-                free(base);
-                return ;
+                exit_game(base);
             }
         }
         else if (!check_symbols(base, map_text, i))
+        {
             printf("%c, symbols arent correct\n", map_text[i]); // проверка на символы
+            free(map_text);
+            exit_game(base);
+        }
     }
     if (base->count_p != 1 || base->count_e != 1 || base->count_c < 0)
     {
         printf("P or E or C arent correct\n");
         free(map_text);
-        free(base);
-        return ;
+        exit_game(base);
     }
 }

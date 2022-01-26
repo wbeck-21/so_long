@@ -11,11 +11,7 @@ void	get_position(t_base *base)
 	
 	base->position_c = (t_pos *)malloc(sizeof(t_pos) * base->count_c + 1);
 	if (!(base->position_c))
-	{
-		printf("im here\n");
-		free(base);
-		return ;
-	}
+		exit_game(base);
 	while (i < base->height)
 	{
 		j = 0;

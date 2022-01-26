@@ -7,10 +7,7 @@ void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 
 	*image = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
 	if (!(*image))
-	{
-		free(base);
-		return ;
-	}
+	    exit_game(base);
 	(*image)->width = width;
 	(*image)->height = height;
 }

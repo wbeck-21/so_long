@@ -24,7 +24,7 @@ void read_map_file(t_base *base, int fd, char **map_text)
             exit_game(base);
 		}
         buf[bytes] = '\0';
-        temp = ft_strjoin(temp, buf); //temp зафришить в конце ft_strjoin
+        temp = ft_strjoin(*map_text, buf); //temp зафришить в конце ft_strjoin
         free(*map_text);
         *map_text = temp;
         if (!(*map_text))
@@ -64,7 +64,6 @@ void map_processor(t_base *base, char *map_file)
         exit_game(base);
     }
     read_map_file(base, fd, &map_text);
-    // printf("%s", map_text); //проверка чтения карты
     close(fd);
     map_init(base, map_text);
     free(map_text);

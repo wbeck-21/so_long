@@ -26,7 +26,7 @@ all:		$(MLX) $(NAME)
 
 $(NAME):	$(OBJ)
 			@make -s -C libft
-			$(CC) $(FLAGS) -o $(NAME) $^ $(LIB)
+			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $^ $(LIB)
 
 $(MLX):
 			@make -s -C mlx

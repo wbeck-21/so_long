@@ -7,7 +7,7 @@ void    map_width(t_base *base, char *map_text)
     if (!base->width)
     {
         free(map_text);
-        exit_game(base);
+        exit_game(base, "Error\n invalid map: width = 0\n");
     }
 }
 
@@ -27,7 +27,7 @@ void    map_height(t_base *base, char *map_text)
             if (j != base->width) //проверка на равенство ширин каждой строки карты
             {
                 free(map_text);
-                exit_game(base);			
+                exit_game(base, "Error\n invalid map: different width\n");
             }
             i += base->width + 1;
             base->height++;

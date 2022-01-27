@@ -11,7 +11,7 @@ void	get_position(t_base *base)
 	
 	base->position_c = (t_pos *)malloc(sizeof(t_pos) * base->count_c + 1);
 	if (!(base->position_c))
-		exit_game(base);
+		exit_game(base, "Error!\nget_position(): malloc()\n");
 	while (i < base->height)
 	{
 		j = 0;
@@ -34,6 +34,7 @@ void	get_position(t_base *base)
 			{
 				base->position_e.x = i;
 				base->position_e.y = j;
+				base->map[i][j] = '0';
 			}
 			j++;
 		}

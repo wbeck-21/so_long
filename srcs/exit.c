@@ -1,9 +1,10 @@
 #include "../include/so_long.h"
 
-void	exit_game(t_base *base)
+void	exit_game(t_base *base, char *error)
 {
     int i;
-
+	if (error)
+		ft_putstr_fd(error, 1);
 	if (base != 0)
 	{
 		if (base->img_1 != 0)

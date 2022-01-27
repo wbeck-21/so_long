@@ -3,7 +3,7 @@
 int	key_press(int key, t_base *base)
 {
 	if (key == 65307)
-		exit_game(base);
+		exit_game(base, 0);
 	if (key == 119)
 		base->up = 1;
 	if (key == 115)
@@ -35,6 +35,6 @@ int	destroy_notify(int key, t_base *base)
 	(void)key;
 	(void)base;
 	
-    exit_game(0); // seg fault
+    exit_game(0, 0); // seg fault
 	return (0);
 }

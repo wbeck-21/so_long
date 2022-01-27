@@ -44,7 +44,7 @@ void	update(t_base *base)
 	// printf("Px - %d Ex - %d\nPy - %d Ey - %d\n", base->position_p.x, base->position_e.x, base->position_p.y, base->position_e.y);
 	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
 	{
-		printf("finish\n");
-		exit_game(base);
+		ft_putstr_fd("finish\n", 1);
+		exit_game(base, 0);
 	}
 }

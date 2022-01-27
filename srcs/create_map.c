@@ -53,14 +53,14 @@ void	create_map(t_base *base)
 			create_field(base, base->img_0, j * 40, i * 40);
 			if (base->map[i][j] == '1')
 				create_field(base, base->img_1, j * 40, i * 40);
-			if (base->position_p.x == i && base->position_p.y == j)
-				create_field(base, base->img_p, j * 40, i * 40);
-			if (base->map[i][j] == 'E')
+			if (base->position_e.x == i && base->position_e.y == j)
 				create_field(base, base->img_e, j * 40, i * 40);
 			k = -1;
 			while (++k < base->count_c)
 				if (base->position_c[k].x == i && base->position_c[k].y == j)
 					create_field(base, base->img_c, j * 40, i * 40);
+			if (base->position_p.x == i && base->position_p.y == j)
+				create_field(base, base->img_p, j * 40, i * 40);
 		}
 	}
 }

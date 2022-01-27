@@ -77,6 +77,6 @@ void	up(t_base *base, int x, int y);
 void	down(t_base *base, int x, int y);
 void	left(t_base *base, int x, int y);
 void	right(t_base *base, int x, int y);
-void	exit_game(t_base *base);
+void	exit_game(t_base *base, char *error);
 
 #endif

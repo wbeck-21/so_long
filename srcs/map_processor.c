@@ -56,7 +56,7 @@ void map_processor(t_base *base, char *map_file)
     
     fd = open(map_file, O_RDONLY);
     if (fd <= 0)
-        exit_game(base, "Error!\nmap_processor(): open()\n");
+        exit_game(0, "Error!\nuncorrect file name, map_processor(): open()\n");
     map_text = ft_calloc(1, 1);
     if (!map_text)
     {

@@ -1,5 +1,7 @@
 NAME		=	so_long
 
+B_NAME      =	so_long_bonus
+
 CC			=	gcc
 
 FLAGS		=	-Wall -Wextra -Werror
@@ -12,36 +14,60 @@ INC			=	-I ./libft -I ./mlx #makefiles
 
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-SRC			=	srcs/so_long.c srcs/events.c \
-				srcs/map_size.c srcs/map_isvalid.c \
-				srcs/map_processor.c srcs/create_map.c \
-				srcs/get_position.c srcs/render_images.c \
-				srcs/update.c srcs/move.c srcs/exit.c
+SRCS		=	mandatory/srcs/so_long.c mandatory/srcs/events.c \
+				mandatory/srcs/map_size.c mandatory/srcs/map_isvalid.c \
+				mandatory/srcs/map_processor.c mandatory/srcs/create_map.c \
+				mandatory/srcs/get_position.c mandatory/srcs/render_images.c \
+				mandatory/srcs/update.c mandatory/srcs/move.c mandatory/srcs/exit.c
 
-OBJ			=	$(SRC:.c=.o)
+B_SRCS		=	bonus/srcs/so_long_bonus.c bonus/srcs/events_bonus.c \
+				bonus/srcs/map_size_bonus.c bonus/srcs/map_isvalid_bonus.c \
+				bonus/srcs/map_processor_bonus.c bonus/srcs/create_map_bonus.c \
+				bonus/srcs/get_position_bonus.c bonus/srcs/render_images_bonus.c \
+				bonus/srcs/update_bonus.c bonus/srcs/move_bonus.c bonus/srcs/exit_bonus.c
+
+OBJS		=	$(SRCS:.c=.o)
+
+B_OBJS		=	$(B_SRCS:.c=.o)
+
+LIBH	=	./mandatory/so_long.h
+
+B_LIBH	=	./bonus/so_long_bonus.h
 
 RM			=	rm -rf
 
 all:		$(MLX) $(NAME)
 
-$(NAME):	$(OBJ)
-			@make -s -C libft
-			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $^ $(LIB)
+bonus:		fclean $(MLX) $(B_NAME)
+
+$(NAME):	$(OBJS)
+			rm -rf $(NAME)
+			make -s -C libft
+			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $? $(LIB)
+
+$(B_NAME):	$(B_OBJS)
+			rm -rf $(NAME)
+			make -s -C libft
+			$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $? $(LIB)
 
 $(MLX):
-			@make -s -C mlx
+			make -s -C mlx
 
-%.o:	%.c
+%.o:	%.c 
 			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+%_bonus.o:	%_bonus.c ${B_LIBH}
+			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
 
 clean:
 			@make -s $@ -C libft
-			@$(RM) $(OBJ)
+			@$(RM) $(OBJS) $(B_OBJS)
 
 fclean:		clean
 			@make -s $@ -C libft
-			@$(RM) $(NAME)
+			@$(RM) $(NAME) $(B_NAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all bonus clean fclean re

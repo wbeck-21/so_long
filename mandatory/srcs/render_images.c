@@ -14,9 +14,9 @@ void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 
 void	render_images(t_base *base)
 {
-	xpm_to_image(base, &base->img_p, "./img/player-5.xpm");
-	xpm_to_image(base, &base->img_c, "./img/collect-item-5.xpm");
-	xpm_to_image(base, &base->img_1, "./img/wall-5.xpm");
-	xpm_to_image(base, &base->img_0, "./img/empty-5.xpm");
-	xpm_to_image(base, &base->img_e, "./img/exit-5.xpm");
+	xpm_to_image(base, &base->img_p, "./mandatory/img/player-5.xpm");
+	xpm_to_image(base, &base->img_c, "./mandatory/img/collect-item-5.xpm");
+	xpm_to_image(base, &base->img_1, "./mandatory/img/wall-5.xpm");
+	xpm_to_image(base, &base->img_0, "./mandatory/img/empty-5.xpm");
+	xpm_to_image(base, &base->img_e, "./mandatory/img/exit-5.xpm");
 }

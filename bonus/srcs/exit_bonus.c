@@ -17,6 +17,8 @@ void	exit_game(t_base *base, char *error)
 			mlx_destroy_image(base->mlx, base->img_e);
 		if (base->img_p != 0)
 			mlx_destroy_image(base->mlx, base->img_p);
+		if (base->img_o != 0)
+			mlx_destroy_image(base->mlx, base->img_o);
 		if (base->image != 0)
 			mlx_destroy_image(base->mlx, base->image);
 		if (base->window != 0)
@@ -31,6 +33,12 @@ void	exit_game(t_base *base, char *error)
 			while (i < base->height)
 				free(base->map[i++]);
 			free(base->map);
+		}
+		if (base->enemy != 0)
+		{
+			if (base->enemy->sprites != 0)
+				free(base->enemy->sprites);
+			free(base->enemy);
 		}
 		free(base);
 	}

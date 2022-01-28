@@ -61,6 +61,15 @@ void	create_map(t_base *base)
 					create_field(base, base->img_c, j * 40, i * 40);
 			if (base->position_p.x == i && base->position_p.y == j)
 				create_field(base, base->img_p, j * 40, i * 40);
+			if (base->position_o.x == i && base->position_o.y == j)
+			{
+				if (base->enemy->sprite_index == 9)
+					base->enemy->sprite_index = 0;
+				else
+					base->enemy->sprite_index++;
+				base->img_o = base->enemy->sprites[base->enemy->sprite_index];
+				create_field(base, base->img_o, j * 40, i * 40);
+			}
 		}
 	}
 }

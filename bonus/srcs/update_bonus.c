@@ -17,6 +17,17 @@ void	catch_c(t_base *base)
 	}
 }
 
+void	print_steps(t_base *base)
+{
+	char	*step;
+
+	step = ft_itoa(base->step);
+	mlx_string_put(base->mlx, base->window, 10, 10, 0xFFFFFF, "Movements: ");
+	mlx_string_put(base->mlx, base->window, 120, 10, 0xFFFFFF, step);
+	free(step);
+}
+
+
 void	update(t_base *base)
 {
 	int				x;
@@ -36,12 +47,16 @@ void	update(t_base *base)
 	{
 		base->step++;
 		// printf("step - ");
-		ft_putnbr_fd(base->step, 1);
-		printf("\n");
+		print_steps(base);
 	}
 	catch_c(base);
 	draw(base);
 	// printf("Px - %d Ex - %d\nPy - %d Ey - %d\n", base->position_p.x, base->position_e.x, base->position_p.y, base->position_e.y);
+	if (base->position_p.x == base->position_o.x && base->position_p.y == base->position_o.y)
+	{
+		ft_putstr_fd("Game Over!\n", 1);
+		exit_game(base, 0);
+	}
 	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
 	{
 		ft_putstr_fd("finish\n", 1);

@@ -36,6 +36,13 @@ void	get_position(t_base *base)
 				base->position_e.y = j;
 				base->map[i][j] = '0';
 			}
+			if (base->map[i][j] == 'O')
+			{
+				base->position_o.x = i;
+				base->position_o.y = j;
+				base->map[i][j] = '0';
+			}
+			// printf("x - %d y - %d\n", base->position_o.x, base->position_o.y);
 			j++;
 		}
 		i++;

@@ -14,12 +14,14 @@ int check_border(t_base *base, int i)
 
 int check_symbols(t_base *base, char *map_text, int i)
 {
-    if (map_text[i] == 'P' || map_text[i] == 'C' || map_text[i] == 'E' || map_text[i] == '1' || map_text[i] == '0')
+    if (map_text[i] == 'P' || map_text[i] == 'C' || map_text[i] == 'E' || map_text[i] == '1' || map_text[i] == '0' || map_text[i] == 'O')
     {
         if (map_text[i] == 'P')
             base->count_p++;
         else if (map_text[i] == 'C')
             base->count_c++;
+        else if (map_text[i] == 'O')
+            base->count_o++;
         else if (map_text[i] == 'E')
             base->count_e++;
         else if (map_text[i] == '1' || map_text[i] == '0')
@@ -43,20 +45,21 @@ void check_valid_map(t_base *base, char *map_text)
             if (map_text[i] != '1')
             {
                 free(map_text);
-                exit_game(base, "Error!\ninvalid borders: it must include only '1'\n");
+                exit_game(0, "Error!\ninvalid borders: it must include only '1'\n");
             }
         }
         else if (!check_symbols(base, map_text, i))
         {
             free(map_text);
-            exit_game(base, "Error!\ninvalid symbols: it must include only '0', '1', 'P', 'E', 'C'\n");
+            exit_game(0, "Error!\ninvalid symbols: it must include only '0', '1', 'P', 'E', 'C', 'O'\n");
         }
+
     }
-    if (base->count_p != 1 || base->count_e != 1 || base->count_c < 0)
+        printf("%d\n", base->count_o);
+    if (base->count_p != 1 || base->count_e != 1 || base->count_c < 0 || base->count_o != 1)
     {
-        printf("P or E or C arent correct\n");
         free(map_text);
-         exit_game(base, "Error!\nuncorrect count of 'P', 'C', 'E': 'P' - 1, 'E' - 1, 'C' >= 1\n");
+        exit_game(0, "Error!\nuncorrect count of 'P', 'C', 'E', 'O': 'P' - 1, 'E' - 1, 'O' - 1, 'C' >= 1\n");
 
     }
 }

@@ -1,23 +1,25 @@
 #include "../include/so_long.h"
 
-unsigned int	mlx_get_pixel(t_img *img, int x, int y)
+unsigned int	mlx_get_color(t_img *img, int x, int y)
 {
-	return (*(unsigned int *)
-		(img->data + (x * img->bpp / 8 + y * img->size_line)));
+	unsigned int *color;
+
+	color = (unsigned int *)(img->data + (x * img->bpp / 8 + y * img->size_line));
+	return (*color);
 }
 
-void	mlx_draw_pixel(t_img *mlx_img, int x, int y, int color)
+void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
 {
-	char			*target;
+	char			*dst;
 
-	target = mlx_img->data + (x * mlx_img->bpp / 8 + y * mlx_img->size_line);
-	*(unsigned int *)target = color;
+	dst = mlx_img->data + (x * mlx_img->bpp / 8 + y * mlx_img->size_line);
+	*(unsigned int *)dst = color;
 }
 
-unsigned int	mlx_rgb_to_int(int o, int r, int g, int b)
-{
-	return (o << 24 | r << 16 | g << 8 | b);
-}
+// unsigned int	mlx_rgb_to_int(int o, int r, int g, int b)
+// {
+// 	return (o << 24 | r << 16 | g << 8 | b);
+// }
 
 static void	create_field(t_base *base, t_img *img, int x, int y)
 {
@@ -25,15 +27,15 @@ static void	create_field(t_base *base, t_img *img, int x, int y)
 	int				i;
 	int				j;
 
-	j = -1;
-	while (++j < 40)
+	i = -1;
+	while (++i < 40)
 	{
-		i = -1;
-		while (++i < 40)
+		j = -1;
+		while (++j < 40)
 		{
-			color = mlx_get_pixel(img, i, j);
-			if (color != mlx_rgb_to_int(0, 255, 255, 255))
-				mlx_draw_pixel(base->image, x + i, y + j, color);
+			color = mlx_get_color(img, i, j);
+			// if (color != mlx_rgb_to_int(0, 255, 255, 255))
+			mlx_put_pixel(base->image, x + i, y + j, color);
 		}
 	}
 }

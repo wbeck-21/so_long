@@ -24,27 +24,32 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
 	base->mlx = 0;
 	base->window = 0;
 	base->image = 0;
+	
     base->map = 0;
+
     base->width = 0;
     base->height = 0;
+
     base->count_p = 0;
     base->count_c = 0;
     base->count_e = 0;
-    base->count_o = 0;
+    base->count_x = 0;
+
 	base->img_p = 0;
     base->img_c = 0;
     base->img_e = 0;
 	base->img_1 = 0;
     base->img_0 = 0;
-    base->img_o = 0;
+    base->img_x = 0;
+
 	base->up = 0;
 	base->down = 0;
 	base->right = 0;
 	base->left = 0;
+
 	base->step = 0;
+
 	base->catch_c = 0;
-	// base->enemy->sprite_index = 0;
-	// base->enemy->sprites = 0;
 
     map_processor(base, map_file);
 	get_position(base);
@@ -81,33 +86,6 @@ int	file_isber(char *map_file)
 	return (1);
 }
 
-// int	animate_enemies(t_base *base)
-// {
-// 	// void	*img;
-// 	int		i;
-// 	int		j;
-
-// 	if (base->enemy->sprite_index == 9)
-// 		base->enemy->sprite_index = 0;
-// 	else
-// 		base->enemy->sprite_index++;
-// 	base->image = base->enemy->sprites[base->enemy->sprite_index];
-// 	i = 0;
-// 	while (base->map[i])
-// 	{
-// 		j = 0;
-// 		while (base->map[i][j])
-// 		{
-// 			if (base->map[i][j] == 'O')
-// 				mlx_put_image_to_window(base->mlx, base->window, base->image,
-// 					j * 40, i * 40);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 int main (int argc, char **argv)
 {
 	t_base *base;
@@ -118,9 +96,9 @@ int main (int argc, char **argv)
 			exit_game(0, "Error!\nNo such file or invalid format: (<name>.ber)\n");
 		base = base_init(argv[1]);
 		draw(base);
+		mlx_loop_hook(base->mlx, print_steps, base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);
-		// mlx_loop_hook(base->mlx, animate_enemies, base);
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);
 		mlx_loop(base->mlx);
 	}

@@ -43,20 +43,19 @@ void check_valid_map(t_base *base, char *map_text)
             if (map_text[i] != '1')
             {
                 free(map_text);
-                exit_game(base, "Error!\ninvalid borders: it must include only '1'\n");
+                exit_game(0, "Error!\ninvalid borders: it must include only '1'\n");
             }
         }
         else if (!check_symbols(base, map_text, i))
         {
             free(map_text);
-            exit_game(base, "Error!\ninvalid symbols: it must include only '0', '1', 'P', 'E', 'C'\n");
+            exit_game(0, "Error!\ninvalid symbols: it must include only '0', '1', 'P', 'E', 'C'\n");
         }
     }
     if (base->count_p != 1 || base->count_e != 1 || base->count_c < 0)
     {
-        printf("P or E or C arent correct\n");
         free(map_text);
-         exit_game(base, "Error!\nuncorrect count of 'P', 'C', 'E': 'P' - 1, 'E' - 1, 'C' >= 1\n");
+        exit_game(0, "Error!\nuncorrect count of 'P', 'C', 'E': 'P' - 1, 'E' - 1, 'C' >= 1\n");
 
     }
 }

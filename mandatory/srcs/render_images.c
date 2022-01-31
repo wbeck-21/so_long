@@ -8,8 +8,9 @@ void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 	*image = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
 	if (!(*image))
 	    exit_game(base, "Error\n xpm_to_image(): mlx_xpm_file_to_image()\n");
-	(*image)->width = width;
-	(*image)->height = height;
+	// (*image)->width = width;
+	// (*image)->height = height;
+	// printf("w - %d h - %d\n", width, height);
 }
 
 void	render_images(t_base *base)

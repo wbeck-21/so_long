@@ -43,11 +43,10 @@ int	key_release(int key, t_base *base)
 	return (0);
 }
 
-int	destroy_notify(int key, t_base *base)
+int	destroy_notify(t_base *base)
 {
-	(void)key;
 	(void)base;
 	
-    exit_game(0, 0); // seg fault
+    exit_game(0, 0);
 	return (0);
 }

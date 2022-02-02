@@ -35,7 +35,7 @@ t_base *base_init(char *map_file) // проверь потом, можно ли 
     base->count_e = 0;
     base->count_x = 0;
 
-	base->img_p = 0;
+	// base->img_p = 0;
     base->img_c = 0;
     base->img_e = 0;
 	base->img_1 = 0;
@@ -86,6 +86,32 @@ int	file_isber(char *map_file)
 	return (1);
 }
 
+int	animate_player(t_base *base)
+{
+	void	*img;
+	int		i;
+	int		j;
+
+	if (base->player->sprite_index == 4)
+		base->player->sprite_index = 0;
+	else
+		base->player->sprite_index++;
+	img = base->player->sprites[base->player->sprite_index];
+	i = 0;
+	while (base->map[i])
+	{
+		j = 0;
+		while (base->map[i][j])
+		{
+			if (base->position_p.x == i && base->position_p.y == j)
+				mlx_put_image_to_window(base->mlx, base->window, img, j * 40, i * 40);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int main (int argc, char **argv)
 {
 	t_base *base;
@@ -97,6 +123,7 @@ int main (int argc, char **argv)
 		base = base_init(argv[1]);
 		draw(base);
 		mlx_loop_hook(base->mlx, print_steps, base);
+		mlx_loop_hook(base->mlx, animate_player, base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);

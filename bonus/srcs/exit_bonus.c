@@ -1,5 +1,22 @@
 #include "../include/so_long_bonus.h"
 
+int free_player(t_base *base)
+{
+	int	i;
+
+	i = -1;
+	while(++i < 5)
+		if (base->player->sprites[i] != 0)
+			mlx_destroy_image(base->mlx, base->player->sprites[i]);
+	if (base->player)
+	{
+		if (base->player->sprites)
+			free(base->player->sprites);
+		free(base->player);
+	}
+	return(0);	
+}
+
 void	exit_game(t_base *base, char *error)
 {
     int i;
@@ -15,10 +32,9 @@ void	exit_game(t_base *base, char *error)
 			mlx_destroy_image(base->mlx, base->img_c);
 		if (base->img_e != 0)
 			mlx_destroy_image(base->mlx, base->img_e);
-		if (base->img_p != 0)
-			mlx_destroy_image(base->mlx, base->img_p);
 		if (base->img_x != 0)
 			mlx_destroy_image(base->mlx, base->img_x);
+		free_player(base);
 		if (base->image != 0)
 			mlx_destroy_image(base->mlx, base->image);
 		if (base->window != 0)

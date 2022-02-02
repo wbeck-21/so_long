@@ -26,11 +26,11 @@ typedef struct s_pos
 	int	y;
 }				t_pos;
 
-// typedef struct s_enemy 
-// {
-// 	void	**sprites;
-// 	int		sprite_index;
-// }			t_enemy;
+typedef struct s_player 
+{
+	void	**sprites;
+	int		sprite_index;
+}			t_player;
 
 
 typedef struct s_base
@@ -57,7 +57,7 @@ typedef struct s_base
 
     int         catch_c;
 
-    t_img       *img_p;
+    // t_img       *img_p;
     t_img       *img_e;
     t_img       *img_c;
     t_img       *img_0;
@@ -69,13 +69,13 @@ typedef struct s_base
     t_pos       position_x;
     t_pos       *position_c;
 
-    // t_enemy     *enemy;
+    t_player     *player;
 }   t_base;
 
 int     print_steps(t_base *base);
 int     key_press(int key, t_base *base);
 int     key_release(int key, t_base *base);
-int     destroy_notify(int key, t_base *base);
+int     destroy_notify(t_base *base);
 void    map_width(t_base *base, char *map_text);
 void    map_height(t_base *base, char *map_text);
 void    check_valid_map(t_base *base, char *map_text);

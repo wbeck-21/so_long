@@ -21,7 +21,7 @@ void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
 // 	return (o << 24 | r << 16 | g << 8 | b);
 // }
 
-static void	create_field(t_base *base, t_img *img, int x, int y)
+void	create_field(t_base *base, t_img *img, int x, int y)
 {
 	unsigned int	color;
 	int				i;
@@ -63,8 +63,6 @@ void	create_map(t_base *base)
 			while (++k < base->count_c)
 				if (base->position_c[k].x == i && base->position_c[k].y == j)
 					create_field(base, base->img_c, j * 40, i * 40);
-			if (base->position_p.x == i && base->position_p.y == j)
-				create_field(base, base->img_p, j * 40, i * 40);
 		}
 	}
 }

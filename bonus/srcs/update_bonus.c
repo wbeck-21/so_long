@@ -7,7 +7,8 @@ void	catch_c(t_base *base)
 	i = 0;
 	while (i < base->count_c)
 	{
-		if (base->position_p.x == base->position_c[i].x && base->position_p.y == base->position_c[i].y)
+		if (base->position_p.x == base->position_c[i].x
+			&& base->position_p.y == base->position_c[i].y)
 		{
 			base->position_c[i].x = -1;
 			base->position_c[i].y = -1;
@@ -36,13 +37,15 @@ void	update(t_base *base)
 		base->step++;
 	catch_c(base);
 	draw(base);
-	// printf("Px - %d Ex - %d\nPy - %d Ey - %d\n", base->position_p.x, base->position_e.x, base->position_p.y, base->position_e.y);
-	if(base->position_p.x == base->position_x.x && base->position_p.y == base->position_x.y)
+	if (base->position_p.x == base->position_x.x
+		&& base->position_p.y == base->position_x.y)
 	{
 		ft_putstr_fd("GAME OVER :(\n", 1);
 		exit_game(base, 0);
 	}
-	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
+	if (base->position_p.x == base->position_e.x
+		&& base->position_p.y == base->position_e.y
+		&& base->catch_c == base->count_c)
 	{
 		ft_putstr_fd("YOU WIN!\n", 1);
 		exit_game(base, 0);

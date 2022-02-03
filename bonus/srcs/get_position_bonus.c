@@ -8,10 +8,9 @@ void	get_position(t_base *base)
 
 	k = 0;
 	i = 0;
-	
 	base->position_c = (t_pos *)malloc(sizeof(t_pos) * base->count_c + 1);
 	if (!(base->position_c))
-		exit_game(base, "Error!\nget_position(): malloc()\n");
+		exit_game(base, ERROR_MALLOC_0);
 	while (i < base->height)
 	{
 		j = 0;

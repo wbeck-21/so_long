@@ -4,54 +4,46 @@ void	render_init(t_base *base)
 {
 	base->mlx = mlx_init();
 	if (!base->mlx)
-	    exit_game(base, "Error!\nmlx_init()\n");
-	base->window = mlx_new_window(base->mlx, base->width * 40, base->height * 40, "so_long");
+		exit_game(base, "Error!\nmlx_init()\n");
+	base->window = mlx_new_window(base->mlx,
+			base->width * 40, base->height * 40, "so_long");
 	if (!base->window)
-	    exit_game(base, "Error!\nmlx_new_window()\n");
+		exit_game(base, "Error!\nmlx_new_window()\n");
 	base->image = mlx_new_image(base->mlx, base->width * 40, base->height * 40);
 	if (!base->image)
-        exit_game(base, "Error!\nmlx_new_image()\n");
+		exit_game(base, "Error!\nmlx_new_image()\n");
 }
 
-t_base *base_init(char *map_file) // проверь потом, можно ли передать из мейна *base
+t_base	*base_init(char *map_file)
 {
-	t_base *base;
-    (void) map_file;
+	t_base	*base;
 
+	(void) map_file;
 	base = (t_base *)malloc(sizeof(t_base));
 	if (!base)
-	    exit_game(base, "Error!\nbase_init(): malloc()\n");
+		exit_game(base, "Error!\nbase_init(): malloc()\n");
 	base->mlx = 0;
 	base->window = 0;
 	base->image = 0;
-	
-    base->map = 0;
-
-    base->width = 0;
-    base->height = 0;
-
-    base->count_p = 0;
-    base->count_c = 0;
-    base->count_e = 0;
-    base->count_x = 0;
-
-	// base->img_p = 0;
-    base->img_c = 0;
-    base->img_e = 0;
+	base->map = 0;
+	base->width = 0;
+	base->height = 0;
+	base->count_p = 0;
+	base->count_c = 0;
+	base->count_e = 0;
+	base->count_x = 0;
+	base->img_c = 0;
+	base->img_e = 0;
 	base->img_1 = 0;
-    base->img_0 = 0;
-    base->img_x = 0;
-
+	base->img_0 = 0;
+	base->img_x = 0;
 	base->up = 0;
 	base->down = 0;
 	base->right = 0;
 	base->left = 0;
-
 	base->step = 0;
-
 	base->catch_c = 0;
-
-    map_processor(base, map_file);
+	map_processor(base, map_file);
 	get_position(base);
 	render_init(base);
 	render_images(base);
@@ -86,40 +78,14 @@ int	file_isber(char *map_file)
 	return (1);
 }
 
-int	animate_player(t_base *base)
+int	main(int argc, char **argv)
 {
-	void	*img;
-	int		i;
-	int		j;
-
-	if (base->player->sprite_index == 4)
-		base->player->sprite_index = 0;
-	else
-		base->player->sprite_index++;
-	img = base->player->sprites[base->player->sprite_index];
-	i = 0;
-	while (base->map[i])
-	{
-		j = 0;
-		while (base->map[i][j])
-		{
-			if (base->position_p.x == i && base->position_p.y == j)
-				mlx_put_image_to_window(base->mlx, base->window, img, j * 40, i * 40);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int main (int argc, char **argv)
-{
-	t_base *base;
+	t_base	*base;
 
 	if (argc == 2)
 	{
 		if (!file_isber(argv[1]))
-			exit_game(0, "Error!\nNo such file or invalid format: (<name>.ber)\n");
+			exit_game(0, ERROR_FILE);
 		base = base_init(argv[1]);
 		draw(base);
 		mlx_loop_hook(base->mlx, print_steps, base);
@@ -129,7 +95,7 @@ int main (int argc, char **argv)
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);
 		mlx_loop(base->mlx);
 	}
-	else 
-		exit_game(0, "Error!\nmore or less args\n");
+	else
+		exit_game(0, ERROR_ARGS);
 	return (0);
 }

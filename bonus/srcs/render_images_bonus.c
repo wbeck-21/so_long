@@ -2,43 +2,41 @@
 
 void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	*image = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
 	if (!(*image))
-	    exit_game(base, "Error\n xpm_to_image(): mlx_xpm_file_to_image()\n");
-	// (*image)->width = width;
-	// (*image)->height = height;
-	// printf("w - %d h - %d\n", width, height);
+		exit_game(base, ERROR_MLX_XPM);
 }
 
 static void	init_player_sprites(t_base *base)
 {
-	int		width;
-	int		height;
-	void	**player_sprites;
+	int			w;
+	int			h;
+	void		**player_sprites;
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
-		exit_game(base, "Error\n");
+		exit_game(base, ERROR_MALLOC_2);
 	player->sprite_index = 0;
 	base->player = player;
-	player_sprites = malloc(sizeof(void *) * 5);
+	player_sprites = malloc(sizeof(void *) * 7);
 	if (!player_sprites)
-		exit_game(base, "Error\n");
+		exit_game(base, ERROR_MALLOC_3);
 	player->sprites = player_sprites;
-	player->sprites[0] = mlx_xpm_file_to_image(base->mlx, "./bonus/img/sprites/player-5_0.xpm", &width, &height);
-	player->sprites[1] = mlx_xpm_file_to_image(base->mlx, "./bonus/img/sprites/player-5_1.xpm", &width, &height);
-	player->sprites[2] = mlx_xpm_file_to_image(base->mlx, "./bonus/img/sprites/player-5_2.xpm", &width, &height);
-	player->sprites[3] = mlx_xpm_file_to_image(base->mlx, "./bonus/img/sprites/player-5_3.xpm", &width, &height);
-	player->sprites[4] = mlx_xpm_file_to_image(base->mlx, "./bonus/img/sprites/player-5_4.xpm", &width, &height);
+	player->sprites[0] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_0, &w, &h);
+	player->sprites[1] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_1, &w, &h);
+	player->sprites[2] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_2, &w, &h);
+	player->sprites[3] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_3, &w, &h);
+	player->sprites[4] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_4, &w, &h);
+	player->sprites[5] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_5, &w, &h);
+	player->sprites[6] = mlx_xpm_file_to_image(base->mlx, IMG_PLAYER_6, &w, &h);
 }
 
 void	render_images(t_base *base)
 {
-	// xpm_to_image(base, &base->img_p, "./bonus/img/player-5.xpm");
 	init_player_sprites(base);
 	xpm_to_image(base, &base->img_c, "./bonus/img/collect-item-5.xpm");
 	xpm_to_image(base, &base->img_1, "./bonus/img/wall-5.xpm");

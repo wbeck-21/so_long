@@ -1,13 +1,40 @@
 #include "../include/so_long_bonus.h"
 
-int print_steps(t_base *base)
+int	animate_player(t_base *base)
+{
+	void	*img;
+	int		i;
+	int		j;
+
+	if (base->player->sprite_index == 6)
+		base->player->sprite_index = 0;
+	else
+		base->player->sprite_index++;
+	img = base->player->sprites[base->player->sprite_index];
+	i = 0;
+	while (base->map[i])
+	{
+		j = 0;
+		while (base->map[i][j])
+		{
+			if (base->position_p.x == i && base->position_p.y == j)
+				mlx_put_image_to_window(base->mlx, base->window,
+					img, j * 40, i * 40);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	print_steps(t_base *base)
 {
 	char	*steps;
 	char	*res;
+
 	steps = ft_itoa(base->step);
 	res = ft_strjoin("Steps: ", steps);
-	mlx_string_put(base->mlx, base->window, 5, 10, 0x0000FF00, res); 
-	// не понимаю какие координаты надо ставить
+	mlx_string_put(base->mlx, base->window, 5, 10, 0x0000FF00, res);
 	free(steps);
 	free(res);
 	return (0);
@@ -46,7 +73,6 @@ int	key_release(int key, t_base *base)
 int	destroy_notify(t_base *base)
 {
 	(void)base;
-	
-    exit_game(0, 0);
+	exit_game(0, 0);
 	return (0);
 }

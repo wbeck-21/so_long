@@ -2,9 +2,10 @@
 
 unsigned int	mlx_get_color(t_img *img, int x, int y)
 {
-	unsigned int *color;
+	unsigned int	*color;
 
-	color = (unsigned int *)(img->data + (x * img->bpp / 8 + y * img->size_line));
+	color = (unsigned int *)(img->data
+			+ (x * img->bpp / 8 + y * img->size_line));
 	return (*color);
 }
 
@@ -15,11 +16,6 @@ void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
 	dst = mlx_img->data + (x * mlx_img->bpp / 8 + y * mlx_img->size_line);
 	*(unsigned int *)dst = color;
 }
-
-// unsigned int	mlx_rgb_to_int(int o, int r, int g, int b)
-// {
-// 	return (o << 24 | r << 16 | g << 8 | b);
-// }
 
 void	create_field(t_base *base, t_img *img, int x, int y)
 {
@@ -34,7 +30,6 @@ void	create_field(t_base *base, t_img *img, int x, int y)
 		while (++j < 40)
 		{
 			color = mlx_get_color(img, i, j);
-			// if (color != mlx_rgb_to_int(0, 255, 255, 255))
 			mlx_put_pixel(base->image, x + i, y + j, color);
 		}
 	}
@@ -44,7 +39,7 @@ void	create_map(t_base *base)
 {
 	int	i;
 	int	j;
-	int k;
+	int	k;
 
 	i = -1;
 	while (++i < base->height)

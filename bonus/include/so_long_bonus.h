@@ -102,7 +102,7 @@ typedef struct s_base
 }   t_base;
 
 int		animate_player(t_base *base);
-int		print_steps(t_base *base);
+void	print_steps(t_base *base);
 int		key_press(int key, t_base *base);
 int		key_release(int key, t_base *base);
 int		destroy_notify(t_base *base);

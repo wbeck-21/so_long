@@ -88,7 +88,6 @@ int	main(int argc, char **argv)
 			exit_game(0, ERROR_FILE);
 		base = base_init(argv[1]);
 		draw(base);
-		mlx_loop_hook(base->mlx, print_steps, base);
 		mlx_loop_hook(base->mlx, animate_player, base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);

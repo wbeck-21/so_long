@@ -66,4 +66,5 @@ void	draw(t_base *base)
 {
 	create_map(base);
 	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
+	print_steps(base);
 }

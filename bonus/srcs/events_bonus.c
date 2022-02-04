@@ -27,7 +27,7 @@ int	animate_player(t_base *base)
 	return (0);
 }
 
-int	print_steps(t_base *base)
+void	print_steps(t_base *base)
 {
 	char	*steps;
 	char	*res;
@@ -37,7 +37,6 @@ int	print_steps(t_base *base)
 	mlx_string_put(base->mlx, base->window, 5, 10, 0x0000FF00, res);
 	free(steps);
 	free(res);
-	return (0);
 }
 
 int	key_press(int key, t_base *base)

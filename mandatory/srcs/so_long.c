@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:32:38 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:37:37 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 21:47:34 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,8 @@ void	render_init(t_base *base)
 		exit_game(base, "Error!\nmlx_new_image()\n");
 }
 
-t_base	*base_init(char *map_file) // проверь потом, можно ли передать из мейна *base
+t_base	*base_init(t_base *base, char *map_file)
 {
-	t_base	*base;
-
-	(void) map_file;
-	base = (t_base *)malloc(sizeof(t_base));
-	if (!base)
-		exit_game(base, "Error!\nbase_init(): malloc()\n");
 	base->mlx = 0;
 	base->window = 0;
 	base->image = 0;
@@ -97,7 +91,10 @@ int	main(int argc, char **argv)
 	{
 		if (!file_isber(argv[1]))
 			exit_game(0, ERROR_FILE);
-		base = base_init(argv[1]);
+		base = (t_base *)malloc(sizeof(t_base));
+		if (!base)
+			exit_game(base, "Error!\nbase_init(): malloc()\n");
+		base = base_init(base, argv[1]);
 		draw(base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);

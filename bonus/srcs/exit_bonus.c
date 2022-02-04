@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:39:53 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 18:51:35 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 21:52:50 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_map(t_base *base)
 	free(base);
 }
 
-void	dastroy_images(t_base *base)
+void	destroy_images(t_base *base)
 {
 	if (base->img_1 != 0)
 		mlx_destroy_image(base->mlx, base->img_1);
@@ -65,7 +65,7 @@ void	exit_game(t_base *base, char *error)
 		ft_putstr_fd(error, 1);
 	if (base != 0)
 	{
-		dastroy_images(base);
+		destroy_images(base);
 		free_player(base);
 		if (base->window != 0)
 			mlx_destroy_window(base->mlx, base->window);

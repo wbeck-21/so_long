@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_isvalid_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 21:13:08 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:13:09 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_bonus.h"
 
 int	check_border(t_base *base, int i)
@@ -34,6 +46,16 @@ int	check_symbols(t_base *base, char *map_text, int i)
 	return (0);
 }
 
+void	check_count_symbols(t_base *base, char *map_text)
+{
+	if (base->count_p != 1 || base->count_e != 1
+		|| base->count_x != 1 || base->count_c < 0)
+	{
+		free(map_text);
+		exit_game(0, ERROR_INVALID_MAP_2);
+	}
+}
+
 void	check_valid_map(t_base *base, char *map_text)
 {
 	int	i;
@@ -57,10 +79,5 @@ void	check_valid_map(t_base *base, char *map_text)
 			exit_game(0, ERROR_INVALID_MAP_1);
 		}
 	}
-	if (base->count_p != 1 || base->count_e != 1
-		|| base->count_x != 1 || base->count_c < 0)
-	{
-		free(map_text);
-		exit_game(0, ERROR_INVALID_MAP_2);
-	}
+	check_count_symbols(base, map_text);
 }

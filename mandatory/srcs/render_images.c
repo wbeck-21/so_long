@@ -1,16 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_images.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 21:30:17 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:30:18 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	*image = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
 	if (!(*image))
-	    exit_game(base, "Error\n xpm_to_image(): mlx_xpm_file_to_image()\n");
-	// (*image)->width = width;
-	// (*image)->height = height;
-	// printf("w - %d h - %d\n", width, height);
+		exit_game(base, ERROR_MLX_XPM);
 }
 
 void	render_images(t_base *base)

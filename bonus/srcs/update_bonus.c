@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 18:52:56 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 19:07:59 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_bonus.h"
 
 void	catch_c(t_base *base)
@@ -15,6 +27,23 @@ void	catch_c(t_base *base)
 			base->catch_c = base->catch_c + 1;
 		}
 		i++;
+	}
+}
+
+void	conditions_exit_game(t_base *base)
+{
+	if (base->position_p.x == base->position_x.x
+		&& base->position_p.y == base->position_x.y)
+	{
+		ft_putstr_fd("GAME OVER :(\n", 1);
+		exit_game(base, 0);
+	}
+	if (base->position_p.x == base->position_e.x
+		&& base->position_p.y == base->position_e.y
+		&& base->catch_c == base->count_c)
+	{
+		ft_putstr_fd("YOU WIN!\n", 1);
+		exit_game(base, 0);
 	}
 }
 
@@ -37,17 +66,5 @@ void	update(t_base *base)
 		base->step++;
 	catch_c(base);
 	draw(base);
-	if (base->position_p.x == base->position_x.x
-		&& base->position_p.y == base->position_x.y)
-	{
-		ft_putstr_fd("GAME OVER :(\n", 1);
-		exit_game(base, 0);
-	}
-	if (base->position_p.x == base->position_e.x
-		&& base->position_p.y == base->position_e.y
-		&& base->catch_c == base->count_c)
-	{
-		ft_putstr_fd("YOU WIN!\n", 1);
-		exit_game(base, 0);
-	}
+	conditions_exit_game(base);
 }

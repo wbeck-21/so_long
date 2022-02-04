@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 20:44:53 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:25:06 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
@@ -18,17 +30,17 @@
 # define ERROR_INVALID_MAP_3 "Error!\nInvalid map: width = 0 and height = 0\n"
 # define ERROR_INVALID_MAP_4 "Error!\nInvalid map: different width\n"
 
-# define ERROR_FT_CALLOC "Error!\nmap_processor(): ft_calloc()\n"
-
 # define ERROR_MALLOC_0 "Error!\nget_position(): malloc()\n"
 # define ERROR_MALLOC_1 "Error!\nread_map_file(): malloc()\n"
 # define ERROR_MALLOC_2 "Error!\ninit_player_sprites(): player = malloc()\n"
 # define ERROR_MALLOC_3 "Error!\ninit_player_sprites(): malloc()\n"
 
 # define ERROR_READ "Error!\nread_map_file(): read()\n"
+# define ERROR_MLX_XPM "Error!\nxpm_to_image(): mlx_xpm_file_to_image()\n"
+
+# define ERROR_FT_CALLOC "Error!\nmap_processor(): ft_calloc()\n"
 # define ERROR_FT_STRJOIN "Error!\nread_map_file(): ft_strjoin()\n"
 # define ERROR_FT_SPLIT "Error!\nmap_init(): ft_split()\n"
-# define ERROR_MLX_XPM "Error!\nxpm_to_image(): mlx_xpm_file_to_image()\n"
 
 # define IMG_PLAYER_0 "./bonus/img/sprites/player_0.xpm"
 # define IMG_PLAYER_1 "./bonus/img/sprites/player_1.xpm"
@@ -46,7 +58,6 @@
 //     t_xpm   *img_0;
 //     t_xpm   *img_1;
 
-
 // }   t_texture;
 
 typedef struct s_pos
@@ -55,54 +66,52 @@ typedef struct s_pos
 	int	y;
 }				t_pos;
 
-typedef struct s_player 
+typedef struct s_player
 {
 	void	**sprites;
 	int		sprite_index;
 }			t_player;
 
-
 typedef struct s_base
 {
-    void	    *mlx;
-	void	    *window;
-    void        *image;
-    
-    char        **map;
-    int         width;
-    int         height;
+	void		*mlx;
+	void		*window;
+	void		*image;
 
-    int         count_p;
-    int         count_c;
-    int         count_e;
-    int         count_x; //enemy
+	char		**map;
+	int			width;
+	int			height;
 
-    int         up;
-    int         down;
-    int         right;
-    int         left;
+	int			count_p;
+	int			count_c;
+	int			count_e;
+	int			count_x;
 
-    int         step;
+	int			up;
+	int			down;
+	int			right;
+	int			left;
 
-    int         catch_c;
+	int			step;
 
-    // t_img       *img_p;
-    t_img       *img_e;
-    t_img       *img_c;
-    t_img       *img_0;
-    t_img       *img_1;
-    t_img       *img_x;
+	int			catch_c;
 
-    t_pos       position_p;
-    t_pos       position_e;
-    t_pos       position_x;
-    t_pos       *position_c;
+	t_img		*img_e;
+	t_img		*img_c;
+	t_img		*img_0;
+	t_img		*img_1;
+	t_img		*img_x;
 
-    t_player     *player;
-}   t_base;
+	t_pos		position_p;
+	t_pos		position_e;
+	t_pos		position_x;
+	t_pos		*position_c;
+
+	t_player	*player;
+
+}				t_base;
 
 int		animate_player(t_base *base);
-void	print_steps(t_base *base);
 int		key_press(int key, t_base *base);
 int		key_release(int key, t_base *base);
 int		destroy_notify(t_base *base);
@@ -110,6 +119,7 @@ int		destroy_notify(t_base *base);
 void	map_width(t_base *base, char *map_text);
 void	map_height(t_base *base, char *map_text);
 
+void	print_steps(t_base *base);
 void	check_valid_map(t_base *base, char *map_text);
 void	map_processor(t_base *base, char *map_file);
 void	create_map(t_base *base);

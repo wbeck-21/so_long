@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_images_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 18:52:41 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:15:30 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_bonus.h"
 
 void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
@@ -38,9 +50,9 @@ static void	init_player_sprites(t_base *base)
 void	render_images(t_base *base)
 {
 	init_player_sprites(base);
-	xpm_to_image(base, &base->img_c, "./bonus/img/collect-item-5.xpm");
-	xpm_to_image(base, &base->img_1, "./bonus/img/wall-5.xpm");
-	xpm_to_image(base, &base->img_0, "./bonus/img/empty-5.xpm");
-	xpm_to_image(base, &base->img_e, "./bonus/img/exit-5.xpm");
-	xpm_to_image(base, &base->img_x, "./bonus/img/enemy-5.xpm");
+	xpm_to_image(base, &base->img_c, "./bonus/img/collect_item.xpm");
+	xpm_to_image(base, &base->img_1, "./bonus/img/wall.xpm");
+	xpm_to_image(base, &base->img_0, "./bonus/img/empty.xpm");
+	xpm_to_image(base, &base->img_e, "./bonus/img/exit.xpm");
+	xpm_to_image(base, &base->img_x, "./bonus/img/enemy.xpm");
 }

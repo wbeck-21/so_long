@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 21:16:52 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:17:38 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 int	key_press(int key, t_base *base)
@@ -30,11 +42,9 @@ int	key_release(int key, t_base *base)
 	return (0);
 }
 
-int	destroy_notify(int key, t_base *base)
+int	destroy_notify(int key)
 {
 	(void)key;
-	(void)base;
-	
-    exit_game(0, 0);
+	exit_game(0, 0);
 	return (0);
 }

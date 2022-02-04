@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 21:31:41 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:31:41 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 void	catch_c(t_base *base)
@@ -7,13 +19,25 @@ void	catch_c(t_base *base)
 	i = 0;
 	while (i < base->count_c)
 	{
-		if (base->position_p.x == base->position_c[i].x && base->position_p.y == base->position_c[i].y)
+		if (base->position_p.x == base->position_c[i].x
+			&& base->position_p.y == base->position_c[i].y)
 		{
 			base->position_c[i].x = -1;
 			base->position_c[i].y = -1;
 			base->catch_c = base->catch_c + 1;
 		}
 		i++;
+	}
+}
+
+void	conditions_exit_game(t_base *base)
+{
+	if (base->position_p.x == base->position_e.x
+		&& base->position_p.y == base->position_e.y
+		&& base->catch_c == base->count_c)
+	{
+		ft_putstr_fd("YOU WIN!\n", 1);
+		exit_game(base, 0);
 	}
 }
 
@@ -33,18 +57,8 @@ void	update(t_base *base)
 	else if (base->right != 0)
 		right(base, x, y);
 	if (base->position_p.x != x || base->position_p.y != y)
-	{
 		base->step++;
-		// printf("step - ");
-		ft_putnbr_fd(base->step, 1);
-		printf("\n");
-	}
 	catch_c(base);
 	draw(base);
-	// printf("Px - %d Ex - %d\nPy - %d Ey - %d\n", base->position_p.x, base->position_e.x, base->position_p.y, base->position_e.y);
-	if(base->position_p.x == base->position_e.x && base->position_p.y == base->position_e.y && base->catch_c == base->count_c)
-	{
-		ft_putstr_fd("finish\n", 1);
-		exit_game(base, 0);
-	}
+	conditions_exit_game(base);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_size_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 18:52:26 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 21:26:25 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long_bonus.h"
 
 void	map_width(t_base *base, char *map_text)
@@ -33,5 +45,4 @@ void	map_height(t_base *base, char *map_text)
 			base->height++;
 		}
 	}
-	return ;
 }

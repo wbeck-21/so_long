@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:17:51 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:20:18 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:19:59 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	get_position_extra(t_base *base, int i, int j)
+static void	get_position_extra(t_base *base, int i, int j)
 {
 	if (base->map[i][j] == 'P')
 	{

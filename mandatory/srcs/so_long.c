@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:32:38 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:47:34 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:22:26 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	render_init(t_base *base)
+static void	render_init(t_base *base)
 {
 	base->mlx = mlx_init();
 	if (!base->mlx)
@@ -55,32 +55,21 @@ t_base	*base_init(t_base *base, char *map_file)
 	return (base);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+static int	file_isber(char *map_file)
 {
-	size_t			i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-int	file_isber(char *map_file)
-{
-	int				len;
+	int	len;
 
 	len = ft_strlen(map_file);
-	if (map_file == 0)
-		return (0);
-	if (len < 5)
-		return (0);
-	if (ft_strcmp(map_file + len - 4, ".ber") != 0)
-		return (0);
-	return (1);
+	if (len > 3
+		&& (
+			map_file[len - 4] == '.'
+			&& map_file[len - 3] == 'b'
+			&& map_file[len - 2] == 'e'
+			&& map_file[len - 1] == 'r'
+		)
+	)
+		return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -95,7 +84,7 @@ int	main(int argc, char **argv)
 		if (!base)
 			exit_game(base, "Error!\nbase_init(): malloc()\n");
 		base = base_init(base, argv[1]);
-		draw(base);
+		create_map(base);
 		mlx_hook(base->window, 2, 1L << 0, key_press, base);
 		mlx_hook(base->window, 3, 1L << 1, key_release, base);
 		mlx_hook(base->window, 17, 1L << 17, destroy_notify, base);

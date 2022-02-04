@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:23:21 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:23:21 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:20:17 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	read_map_file(t_base *base, int fd, char **map_text, char *buf)
+static void	read_map_file(t_base *base, int fd, char **map_text, char *buf)
 {
 	char	*temp;
 	int		bytes;
@@ -40,7 +40,7 @@ void	read_map_file(t_base *base, int fd, char **map_text, char *buf)
 	free(buf);
 }
 
-void	map_init(t_base *base, char *map_text)
+static void	map_init(t_base *base, char *map_text)
 {
 	map_width(base, map_text);
 	map_height(base, map_text);

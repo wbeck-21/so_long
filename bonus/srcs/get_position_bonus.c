@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_position_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbeck <wbeck@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:39:59 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 18:47:56 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:11:30 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-void	get_position_extra(t_base *base, int i, int j)
+static void	get_position_extra(t_base *base, int i, int j)
 {
 	if (base->map[i][j] == 'P')
 	{

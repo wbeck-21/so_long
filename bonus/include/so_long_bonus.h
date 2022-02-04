@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:44:53 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:25:06 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:04:44 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-# define ERROR_FILE "Error!\nFile isn't exit: check name or format\n"
+# define ERROR_FILE "Error!\nFile doesn't exist: check name or format\n"
 # define ERROR_ARGS "Error!\nMore or less args\n"
 
 # define ERROR_INVALID_MAP_0 "Error!\nInvalid map: map borders contain only '1'\n"
@@ -125,7 +125,7 @@ void	map_processor(t_base *base, char *map_file);
 void	create_map(t_base *base);
 void	render_images(t_base *base);
 void	get_position(t_base *base);
-void	draw(t_base *base);
+void	create_map(t_base *base);
 void	update(t_base *base);
 
 void	up(t_base *base, int x, int y);

@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:31:41 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:31:41 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:23:07 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	catch_c(t_base *base)
+static void	catch_c(t_base *base)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	catch_c(t_base *base)
 	}
 }
 
-void	conditions_exit_game(t_base *base)
+static void	conditions_exit_game(t_base *base)
 {
 	if (base->position_p.x == base->position_e.x
 		&& base->position_p.y == base->position_e.y
@@ -59,6 +59,6 @@ void	update(t_base *base)
 	if (base->position_p.x != x || base->position_p.y != y)
 		base->step++;
 	catch_c(base);
-	draw(base);
+	create_map(base);
 	conditions_exit_game(base);
 }

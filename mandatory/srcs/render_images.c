@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:30:17 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:42:47 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:20:25 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
+static void	xpm_to_image(t_base *base, t_img **image, char *relative_path)
 {
 	int	width;
 	int	height;

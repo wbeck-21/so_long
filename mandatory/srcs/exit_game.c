@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_bonus.c                                       :+:      :+:    :+:   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 18:39:53 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:52:50 by wbeck            ###   ########.fr       */
+/*   Created: 2022/02/04 21:51:20 by wbeck             #+#    #+#             */
+/*   Updated: 2022/02/04 22:19:48 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
-int	free_player(t_base *base)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 7)
-		if (base->player->sprites[i] != 0)
-			mlx_destroy_image(base->mlx, base->player->sprites[i]);
-	if (base->player)
-	{
-		if (base->player->sprites)
-			free(base->player->sprites);
-		free(base->player);
-	}
-	return (0);
-}
-
-void	free_map(t_base *base)
+static void	free_map(t_base *base)
 {
 	int	i;
 
@@ -43,7 +26,7 @@ void	free_map(t_base *base)
 	free(base);
 }
 
-void	destroy_images(t_base *base)
+static void	destroy_images(t_base *base)
 {
 	if (base->img_1 != 0)
 		mlx_destroy_image(base->mlx, base->img_1);
@@ -53,8 +36,8 @@ void	destroy_images(t_base *base)
 		mlx_destroy_image(base->mlx, base->img_c);
 	if (base->img_e != 0)
 		mlx_destroy_image(base->mlx, base->img_e);
-	if (base->img_x != 0)
-		mlx_destroy_image(base->mlx, base->img_x);
+	if (base->img_p != 0)
+		mlx_destroy_image(base->mlx, base->img_p);
 	if (base->image != 0)
 		mlx_destroy_image(base->mlx, base->image);
 }
@@ -66,7 +49,6 @@ void	exit_game(t_base *base, char *error)
 	if (base != 0)
 	{
 		destroy_images(base);
-		free_player(base);
 		if (base->window != 0)
 			mlx_destroy_window(base->mlx, base->window);
 		if (base->mlx != 0)

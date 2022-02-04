@@ -15,16 +15,16 @@ INC			=	-I ./libft -I ./mlx #makefiles
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
 SRCS		=	mandatory/srcs/so_long.c mandatory/srcs/events.c \
-				mandatory/srcs/map_size.c mandatory/srcs/map_isvalid.c \
+				mandatory/srcs/map_size.c mandatory/srcs/check_valid_map.c \
 				mandatory/srcs/map_processor.c mandatory/srcs/create_map.c \
 				mandatory/srcs/get_position.c mandatory/srcs/render_images.c \
-				mandatory/srcs/update.c mandatory/srcs/move.c mandatory/srcs/exit.c
+				mandatory/srcs/update.c mandatory/srcs/move.c mandatory/srcs/exit_game.c
 
 B_SRCS		=	bonus/srcs/so_long_bonus.c bonus/srcs/events_bonus.c \
-				bonus/srcs/map_size_bonus.c bonus/srcs/map_isvalid_bonus.c \
+				bonus/srcs/map_size_bonus.c bonus/srcs/check_valid_map_bonus.c \
 				bonus/srcs/map_processor_bonus.c bonus/srcs/create_map_bonus.c \
 				bonus/srcs/get_position_bonus.c bonus/srcs/render_images_bonus.c \
-				bonus/srcs/update_bonus.c bonus/srcs/move_bonus.c bonus/srcs/exit_bonus.c
+				bonus/srcs/update_bonus.c bonus/srcs/move_bonus.c bonus/srcs/exit_game_bonus.c
 
 OBJS		=	$(SRCS:.c=.o)
 

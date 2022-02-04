@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:27:11 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 21:40:49 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:09:27 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-# define ERROR_FILE "Error!\nFile isn't exit: check name or format\n"
+# define ERROR_FILE "Error!\nFile doesn't exist: check name or format\n"
 # define ERROR_ARGS "Error!\nMore or less args\n"
 
 # define ERROR_MALLOC_0 "Error!\nget_position(): malloc()\n"

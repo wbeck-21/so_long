@@ -6,13 +6,13 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:39:07 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 18:51:41 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/04 22:10:27 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-unsigned int	mlx_get_color(t_img *img, int x, int y)
+static unsigned int	mlx_get_color(t_img *img, int x, int y)
 {
 	unsigned int	*color;
 
@@ -21,7 +21,7 @@ unsigned int	mlx_get_color(t_img *img, int x, int y)
 	return (*color);
 }
 
-void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
+static void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
 {
 	char			*dst;
 
@@ -29,7 +29,7 @@ void	mlx_put_pixel(t_img *mlx_img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	create_field(t_base *base, t_img *img, int x, int y)
+static void	draw_field(t_base *base, t_img *img, int x, int y)
 {
 	unsigned int	color;
 	int				i;
@@ -47,7 +47,7 @@ void	create_field(t_base *base, t_img *img, int x, int y)
 	}
 }
 
-void	create_map(t_base *base)
+static void	draw_map(t_base *base)
 {
 	int	i;
 	int	j;
@@ -59,24 +59,24 @@ void	create_map(t_base *base)
 		j = -1;
 		while (++j < base->width)
 		{
-			create_field(base, base->img_0, j * 40, i * 40);
+			draw_field(base, base->img_0, j * 40, i * 40);
 			if (base->map[i][j] == '1')
-				create_field(base, base->img_1, j * 40, i * 40);
+				draw_field(base, base->img_1, j * 40, i * 40);
 			if (base->position_e.x == i && base->position_e.y == j)
-				create_field(base, base->img_e, j * 40, i * 40);
+				draw_field(base, base->img_e, j * 40, i * 40);
 			if (base->position_x.x == i && base->position_x.y == j)
-				create_field(base, base->img_x, j * 40, i * 40);
+				draw_field(base, base->img_x, j * 40, i * 40);
 			k = -1;
 			while (++k < base->count_c)
 				if (base->position_c[k].x == i && base->position_c[k].y == j)
-					create_field(base, base->img_c, j * 40, i * 40);
+					draw_field(base, base->img_c, j * 40, i * 40);
 		}
 	}
 }
 
-void	draw(t_base *base)
+void	create_map(t_base *base)
 {
-	create_map(base);
+	draw_map(base);
 	mlx_put_image_to_window(base->mlx, base->window, base->image, 0, 0);
 	print_steps(base);
 }

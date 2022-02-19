@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:27:11 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 22:09:27 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/02/19 19:00:48 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,6 @@
 # define ERROR_FT_CALLOC "Error!\nmap_processor(): ft_calloc()\n"
 # define ERROR_FT_STRJOIN "Error!\nread_map_file(): ft_strjoin()\n"
 # define ERROR_FT_SPLIT "Error!\nmap_init(): ft_split()\n"
-
-// typedef struct s_texture
-// {
-//     t_xpm   *img_p;
-//     t_xpm   *img_c;
-//     t_xpm   *img_e;
-//     t_xpm   *img_0;
-//     t_xpm   *img_1;
-// }   t_texture;
 
 typedef struct s_pos
 {

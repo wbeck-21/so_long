@@ -36,7 +36,7 @@ B_LIBH	=	./bonus/so_long_bonus.h
 
 RM			=	rm -rf
 
-all:		$(MLX) $(NAME)
+all:		fclean $(MLX) $(NAME)
 
 bonus:		fclean $(MLX) $(B_NAME)
 

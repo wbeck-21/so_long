@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:21:33 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 22:19:07 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:40:58 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	check_symbols(t_base *base, char *map_text, int i)
 
 static void	check_count_symbols(t_base *base, char *map_text)
 {
-	if (base->count_p != 1 || base->count_e != 1 || base->count_c < 0)
+	if (base->count_p != 1 || base->count_e < 0 || base->count_c < 0)
 	{
 		free(map_text);
 		exit_game(0, ERROR_INVALID_MAP_2);

@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:51:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 22:19:48 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:45:40 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	exit_game(t_base *base, char *error)
 			mlx_destroy_display(base->mlx);
 		if (base->position_c != 0)
 			free(base->position_c);
+		if (base->position_e != 0)
+			free(base->position_e);
 		free_map(base);
 	}
 	exit(0);

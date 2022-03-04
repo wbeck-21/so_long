@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:27:11 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/19 19:00:48 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:40:35 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_base
 	t_img		*img_p;
 
 	t_pos		position_p;
-	t_pos		position_e;
+	t_pos		*position_e;
 	t_pos		*position_c;
 
 }				t_base;

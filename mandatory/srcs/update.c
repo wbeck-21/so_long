@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:31:41 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 22:23:07 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:50:20 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,19 @@ static void	catch_c(t_base *base)
 
 static void	conditions_exit_game(t_base *base)
 {
-	if (base->position_p.x == base->position_e.x
-		&& base->position_p.y == base->position_e.y
-		&& base->catch_c == base->count_c)
+	int	i;
+
+	i = 0;
+	while (i < base->count_e)
 	{
-		ft_putstr_fd("YOU WIN!\n", 1);
-		exit_game(base, 0);
+		if (base->position_p.x == base->position_e[i].x
+			&& base->position_p.y == base->position_e[i].y
+			&& base->catch_c == base->count_c)
+		{
+			ft_putstr_fd("YOU WIN!\n", 1);
+			exit_game(base, 0);
+		}
+		i++;
 	}
 }
 

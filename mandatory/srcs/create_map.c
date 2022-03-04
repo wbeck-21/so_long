@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:16:04 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/04 22:21:51 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:43:17 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ static void	draw_map(t_base *base)
 			draw_field(base, base->img_0, j * 40, i * 40);
 			if (base->map[i][j] == '1')
 				draw_field(base, base->img_1, j * 40, i * 40);
-			if (base->position_e.x == i && base->position_e.y == j)
-				draw_field(base, base->img_e, j * 40, i * 40);
+			k = -1;
+			while (++k < base->count_e)
+				if (base->position_e[k].x == i && base->position_e[k].y == j)
+					draw_field(base, base->img_e, j * 40, i * 40);
 			k = -1;
 			while (++k < base->count_c)
 				if (base->position_c[k].x == i && base->position_c[k].y == j)

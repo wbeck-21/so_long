@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 21:26:39 by wbeck             #+#    #+#             */
-/*   Updated: 2022/02/19 18:58:36 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/04 20:15:33 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	map_width(t_base *base, char *map_text)
 	if (!base->width)
 	{
 		free(map_text);
-		exit_game(base, ERROR_INVALID_MAP_3);
+		exit_game(0, ERROR_INVALID_MAP_3);
 	}
 }
 
